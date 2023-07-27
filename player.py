@@ -6,7 +6,7 @@ class Player:
 		self.y = y
 
 
-	def leagall_movement(self):
+	def leagall_movement(self, new_x, new_y):
 		raise NotImplemented
 
 	def check_if_free_movement(self, new_x, new_y current_board):
@@ -19,14 +19,11 @@ class Player:
 			return True
 		return True
 
-	def check_movement(self, new_x, new_y current_board):
-		if self.leagall_movement():
-			# check if there is a soldier from the same color
-			return True
-		return False
+	def check_movement(self, new_x, new_y, current_board):
+		return self.leagall_movement(new_x, new_y) and self.check_if_free_movement(new_x, new_y, current_board)
 
 	def move(self, new_x, new_y, current_board):
-		if self.check_movement(current_board):
+		if self.check_movement(new_x, new_y, current_board):
 			current_board[self.x][self.y] = None
 			self.x = new_x
 			self.y = new_y
